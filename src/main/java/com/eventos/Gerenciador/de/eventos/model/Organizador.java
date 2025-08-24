@@ -1,9 +1,9 @@
 package com.eventos.Gerenciador.de.eventos.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
 
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "organizador")
@@ -23,26 +23,15 @@ public class Organizador{
     @Column
     private String email;
 
-    public Organizador() {
+    @OneToMany(mappedBy = "organizador", cascade = CascadeType.ALL)
+    private List<Evento> eventos = new ArrayList<>();
 
+    public List<Evento> getEventos() {
+        return eventos;
     }
 
-    @Override
-    public String toString() {
-        return "Organizador{" +
-                "id_organizador=" + id_organizador +
-                ", nome='" + nome + '\'' +
-                ", telefone='" + telefone + '\'' +
-                ", email='" + email + '\'' +
-                '}';
-    }
-
-    public Integer getId_organizador() {
-        return id_organizador;
-    }
-
-    public void setId_organizador(Integer id_organizador) {
-        this.id_organizador = id_organizador;
+    public void setEventos(List<Evento> eventos) {
+        this.eventos = eventos;
     }
 
     public String getNome() {
@@ -51,6 +40,14 @@ public class Organizador{
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public Integer getId_organizador() {
+        return id_organizador;
+    }
+
+    public void setId_organizador(Integer id_organizador) {
+        this.id_organizador = id_organizador;
     }
 
     public String getTelefone() {
@@ -75,4 +72,6 @@ public class Organizador{
         this.email = email;
         this.telefone = telefone;
     }
+
+    public Organizador(){}
 }
