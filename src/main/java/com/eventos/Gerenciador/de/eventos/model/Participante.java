@@ -1,6 +1,9 @@
 package com.eventos.Gerenciador.de.eventos.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,12 +18,19 @@ public class Participante {
     private Integer id_participante;
 
     @Column
+    @NotBlank(message = "nome é obrigatório")
+    @Size(max = 45, message = "o nome pode ter até 45 caracteres")
     private String nome;
 
     @Column
+    @NotBlank(message = "o email é obrigatório")
+    @Size(max = 45, message = "o email pode ter até 45 caracteres")
+    @Email(message = "o email nao é válido")
     private String email;
 
     @Column
+    @NotBlank(message = "o telefone é obrigatório")
+    @Size(max = 20, message = "o telefone pode ter até 20 caracteres")
     private String telefone;
 
     @OneToMany(mappedBy = "participante", cascade = CascadeType.ALL)

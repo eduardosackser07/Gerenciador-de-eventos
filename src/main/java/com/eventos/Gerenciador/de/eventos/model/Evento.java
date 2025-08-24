@@ -1,6 +1,10 @@
 package com.eventos.Gerenciador.de.eventos.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -16,20 +20,31 @@ public class Evento {
     private Integer id_evento;
 
     @Column
+    @NotBlank(message = "nome do evento é obrigatório")
+    @Size(max = 45, message = "o nome do evento pode ter até 45 caracteres")
     private String nome;
 
     @Column
+    @NotBlank(message = "o local do evento é obrigatório")
+    @Size(max = 80, message = "o local do evento pode ter até 80 caracteres")
     private String local_evento;
 
     @Column
+    @NotBlank(message = "a data do evento é obrigatória")
+    @FutureOrPresent(message = "a data do evento deve ser hoje ou no futuro")
     private LocalDate data_evento;
 
     @Column
+    @NotBlank(message = "a descrição do evento é obrigatória")
+    @Size(max = 100, message = "a descrição do evento pode ter até 100 caracteres")
     private String descricao;
 
     @Column
+    @NotBlank(message = "tipo do evento é obrigatório")
+    @Size(max = 30)
     private String tipo_evento;
 
+    @NotNull(message = "o organizador é obrigatório")
     @ManyToOne
     @JoinColumn(name = "id_organizador")
     private Organizador organizador;

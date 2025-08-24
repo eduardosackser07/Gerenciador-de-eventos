@@ -1,6 +1,7 @@
 package com.eventos.Gerenciador.de.eventos.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "venda")
@@ -11,10 +12,12 @@ public class Venda {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_venda;
 
+    @NotBlank(message = "participante eh obrigatorio")
     @ManyToOne
     @JoinColumn(name = "id_participante")
     private Participante participante;
 
+    @NotBlank(message = "o ingresso eh obrigatorio")
     @ManyToOne
     @JoinColumn(name = "id_ingresso")
     private Ingresso ingresso;

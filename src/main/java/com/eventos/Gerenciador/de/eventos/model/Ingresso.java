@@ -1,6 +1,8 @@
 package com.eventos.Gerenciador.de.eventos.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -15,9 +17,12 @@ public class Ingresso {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_ingresso;
 
+    @NotNull(message = "o valor não pode ser nulo")
+    @DecimalMin(value = "0.01", message = "o valor deve ser maior que 0")
     @Column(precision = 5, scale = 2, nullable = false)
     private BigDecimal valor;
 
+    @NotNull(message = "o evento é obrigatório")
     @ManyToOne
     @JoinColumn(name = "id_evento")
     private Evento evento;
