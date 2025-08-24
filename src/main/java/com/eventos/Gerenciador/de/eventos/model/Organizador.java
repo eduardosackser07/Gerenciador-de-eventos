@@ -32,6 +32,20 @@ public class Organizador{
     @Email(message = "o email é inválido")
     private String email;
 
+    @NotBlank(message = "Senha é obrigatória")
+    @Size(min = 4, max = 100, message = "A senha deve ter entre 4 e 100 caracteres")
+    @Column(nullable = false)
+    private String senha;
+
+    public String getSenha(){
+        return senha;
+    }
+
+    public void setSenha(String senha){
+        this.senha = senha;
+    }
+
+
     @OneToMany(mappedBy = "organizador", cascade = CascadeType.ALL)
     private List<Evento> eventos = new ArrayList<>();
 

@@ -33,18 +33,32 @@ public class Participante {
     @Size(max = 20, message = "o telefone pode ter até 20 caracteres")
     private String telefone;
 
+    @NotBlank(message = "Senha é obrigatória")
+    @Size(min = 4, max = 100, message = "A senha deve ter entre 4 e 100 caracteres")
+    @Column(nullable = false)
+    private String senha;
+
     @OneToMany(mappedBy = "participante", cascade = CascadeType.ALL)
     private List<Venda> vendas = new ArrayList<>();
 
-    public Participante(Integer id_participante, String nome, String telefone, String email, List<Venda> vendas) {
+    public Participante(Integer id_participante, String nome, String email, String telefone, String senha, List<Venda> vendas) {
         this.id_participante = id_participante;
         this.nome = nome;
-        this.telefone = telefone;
         this.email = email;
+        this.telefone = telefone;
+        this.senha = senha;
         this.vendas = vendas;
     }
 
     public Participante() {
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
     public Integer getId_participante() {
